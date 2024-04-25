@@ -1,36 +1,13 @@
 <!DOCTYPE html>
 <head>
-    <title>My site: Justin King</title>
-    <style>
-        body {
-            background:linear-gradient(to right, #30CFD0, #c43ad6);
-            margin:0;
-        }
-        .header{
-            background: #363432;
-            height:50px;
-            padding-top:10px;
-            padding-left:20px;
-            color: White;
-            font-size: 26px;
-        }
-        .content{
-            height: calc(100%-60px);
-        }
-        .welcomeText{
-            position: absolute;
-            left:50%;
-            top:50%;
-            transform:translate(-50%,-50%);
-            color: White;
-            font-size: 10vw;
-            width: 85%;
-            text-align: center;
-        }
-    </style>
+    <title>Web Design Class</title>
+    <link rel="stylesheet" href="/css/sharedcss.css">
+    <script src="/scripts/sharedjs.js"></script>
 </head>
 <body>
-    <div class="header">😁 Justin P. King</div>
+    <div id="nav">
+        <script>injectHTML("#nav", "/partial/navbar.html", true);</script>
+    </div>
     <div class="content">
         <div class="welcomeText">Welcome to my site!</div>
     </div>
