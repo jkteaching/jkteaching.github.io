@@ -1,0 +1,29 @@
+body {
+    background:linear-gradient(to right, #30CFD0, #c43ad6);
+    margin:0;
+}
+.header{
+    background: #363432;
+    height:50px;
+    padding-top:10px;
+    padding-left:20px;
+    color: White;
+    font-size: 26px;
+}
+.header a {
+    color: white;
+    text-decoration: none;
+}
+.content{
+    height: calc(100%-60px);
+}
+.welcomeText{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color: White;
+    font-size: 10vw;
+    width: 85%;
+    text-align: center;
+}
