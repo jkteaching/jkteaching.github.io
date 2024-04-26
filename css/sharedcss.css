@@ -10,11 +10,15 @@ body {
     color: White;
     font-size: 26px;
 }
+nav.header{
+    border-top: solid 1px white;
+    padding: 0;
+}
 .header a {
     color: white;
     text-decoration: none;
     border-right: solid 1px white;
-    padding: 10px 8px 0;
+    padding: 10px 10px 0;
     height: 50px;
     display: inline-block;
     box-sizing: border-box;
@@ -23,6 +27,7 @@ body {
 }
 .header a:first-child {
     border-left: solid 1px white;
+    padding-left: 10px;
 }
 .header a:hover {
     background: #c43ad6;
