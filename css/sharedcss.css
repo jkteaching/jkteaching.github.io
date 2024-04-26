@@ -13,6 +13,19 @@ body {
 .header a {
     color: white;
     text-decoration: none;
+    border-right: solid 1px white;
+    padding: 10px 8px 0;
+    height: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: -6px;
+    cursor:pointer;
+}
+.header a:first-child {
+    border-left: solid 1px white;
+}
+.header a:hover {
+    background: #c43ad6;
 }
 .content{
     height: calc(100%-60px);
