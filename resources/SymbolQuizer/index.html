@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Symbol Quizzer</title>
+        <style>
+            .correct{
+                color:green;
+            }
+
+            .incorrect{
+                color:red;
+            }
+
+            button:disabled{
+                display: none;
+            }
+
+            .symbol{
+                width:24px;
+                text-align: center;
+            }
+
+            .symbol.leftAlign{
+                text-align: left;
+            }
+
+            .symbol.rightAlign{
+                text-align: right;
+            }
+            .bold{
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>JS Symbol Quizzer</h1>
+        <div id="content">
+            <div>
+                <h2>Symbols To Test</h2>
+                <label><input id="useArithmeticSymbols" type="checkbox" checked/>Arithmetic Symbols</label><br>
+                <label><input id="useAssignmentSymbols" type="checkbox"/>Assignment Symbols</label><br>
+                <label><input id="useComparisonSymbols" type="checkbox"/>Comparison Symbols</label><br>
+                <label><input id="useLogicalSymbols" type="checkbox"/>Logical Symbols</label><br>
+                <label><input id="useBitwiseSymbols" type="checkbox"/>Bitwise Symbols</label><br>
+            </div>
+            <div>
+                <h2>Additional Options</h2>
+                <label><input id="useHints" type="checkbox" checked/>Show Hints</label><br>
+                <label for="questionCount">Amount of Question</label><br>
+                <input id="questionCount" type="number" />
+                <div>** leave blank to test all</div>
+            </div>
+            <button onclick="configProblemGenerator();">Start Quiz</button>
+        </div>
+        <button id="prev" disabled>Previous</button>
+        <button id="next" disabled>Next</button>
+        <script type="text/javascript" src="/resources/SymbolQuizer/Quizer.js"></script>
+    </body>
+</html>
