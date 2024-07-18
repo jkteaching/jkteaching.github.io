@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Functions</title>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <link rel="stylesheet" href="/resources/CourseWorker/themes.css"/>
+        <link rel="stylesheet" href="/resources/CourseWorker/site.css"/>
+        <script src="/resources/CourseWorker/JavascriptCourse.js"></script>
+        <script src="/resources/CourseWorker/CourseWorker.js"></script>
+    </head>
+    <body class="coffee">
+        <header>
+            <div class="nav-item">
+                <span class="logo">JPK</span>
+            </div>
+            <div class="nav-item flex-1">
+                <div class="icon-with-text">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon">&#xe105;</span>
+                        <span>Resources</span>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <div class="icon-with-text">
+                    <a id="course-list" href="#">
+                        <span class="material-symbols-outlined icon">&#xf844;</span>
+                        <span>Course</span>
+                    </a>
+            </div>
+            <div class="nav-item">
+                <div class="icon-with-text">
+                    <a id="settings" href="#">
+                        <span class="material-symbols-outlined icon">&#xe8b8;</span>
+                    </a>
+            </div>
+        </header>
+        <h1 id="title">JavaScripts Basics</h1>
+        <div page="1" section="lesson">
+            <div id="lesson" tabname="lesson" movetotab="lesson" aria-disabled="false">
+                <h2 class="icon-with-text">
+                    <span class="material-symbols-outlined icon">&#xef42;</span>
+                    <span>Lecture</span>
+                </h2>
+                <div id="lecture" class="section-content" ></div>
+                <div class="actions">
+                    <button class="action" movetotab="exercise">Move to Exercise</button>
+                </div>
+            </div>
+            <div id="exercise" tabname="exercise" movetotab="exercise" aria-disabled="true">
+                <h2 class="icon-with-text">
+                    <span class="material-symbols-outlined icon">&#xef54;</span>
+                    <span>Exercise</span>
+                </h2>
+                <div class="section-content" >
+                    <h3 class="icon-with-text">
+                        <span class="material-symbols-outlined icon">&#xe873;</span>
+                        <span>Exercise Overview</span>
+                    </h3>
+                    <div id="exercise-overview"></div>
+                    <h3 class="icon-with-text">
+                        <span class="material-symbols-outlined icon">&#xf075;</span>
+                        <span>Instuctions</span>
+                    </h3>
+                    <div id="instructions"></div>
+                    <div class="actions">
+                        <div id="exercise-message"></div>
+                        <button id="nextlesson" class="action" movetotab="exercise" disabled>Next Lesson</button>
+                    </div>
+                    <h3 class="icon-with-text">
+                        <span class="material-symbols-outlined icon">&#xf075;</span>
+                        <span>Workspace</span>
+                    </h3>
+                    <div class="work">
+                        <div id="coding">
+                            <h4>Code</h4>
+                            <div class="code-tools">
+                                <button id="code-run" class="tool icon-with-text">
+                                    <span class="material-symbols-outlined icon">&#xe037;</span>
+                                    <span>Run</span>
+                                </button>
+                                <button id="code-copy" class="tool icon-with-text">
+                                    <span class="material-symbols-outlined icon">&#xe14d;</span>
+                                    <span>Copy</span>
+                                </button>
+                            </div>
+                            <div> 
+                                <ol id="code" class="code"></ol>
+                            </div>
+                        </div>
+                        <div id="result">
+                            <h4>Results</h4>
+                            <iframe id="results-iframe" width="100%" height="calc(100%-2rem)">
+                                This is where results go.
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="after"></div>
+        <script>    
+            const courseWorker = new CourseWorker();
+            (function(){ 
+                courseWorker.loadCourse(courseData);
+            })();
+        </script>
+    </body>
+</html>

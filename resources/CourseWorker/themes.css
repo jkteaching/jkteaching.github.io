@@ -1,0 +1,37 @@
+.coffee {
+    --clr-code-numbers-backdrop: #404040;
+    --clr-code-numbers: #d0b9a5;
+    --clr-code-backdrop: #686868;
+    --clr-code-text: #ffdab9;
+    --clr-code-input-text: #e0ffff;
+    --clr-code-input-border: #fbeadc;
+    --clr-code-tool-bkg: #404040;
+    --clr-code-tool-bkg-hover: #686868;
+
+
+    --clr-head-text: #fff;
+    --clr-head-bkg: #265311;
+    
+    --clr-blur-bkg: rgba(38, 83, 17, 0.3);
+
+    --clr-head-link-text: #ffdab9;
+    --clr-head-link-hover-text: #e0ffff;
+
+    --clr-h1-bkg: #ffdab9;
+    --clr-h2-bkg: #cfcfce;
+    --clr-h3-bkg: #fbefe4;
+    --clr-h4-bkg: #bfd6b5;
+
+    --clr-btn-brd: #1e460c;
+    --clr-btn-bkg: #265311;
+    --clr-btn-text: #fff;
+
+    --clr-btn-brd-hover: #166c6c;
+    --clr-btn-bkg-hover: #278686;
+    --clr-btn-text-hover: #e0ffff;
+
+    --clr-content-bkg: #fff;
+    --clr-body-bkg: #e6e6e4;
+    --clr-success:#0aac0a;
+    --clr-fail:#f11616;
+}
