@@ -94,6 +94,7 @@ class CourseWorker {
 
     #toggleFlyout(flyoutId){
         document.getElementById(flyoutId).classList.toggle("hide");
+        document.getElementById("page-content").classList.toggle("mild-blur");
     }
 
     #setupCourseList(){

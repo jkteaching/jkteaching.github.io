@@ -50,6 +50,15 @@ header a, header span{
     display:inherit;
 }
 
+header a{
+    text-decoration: none;
+    color:var(--clr-head-link-text);
+}
+
+header a:hover{
+    color:var(--clr-head-link-hover-text);
+}
+
 .flex-1{
     flex:1;
 }
@@ -260,6 +269,10 @@ div[section="lesson"] > div#exercise::before{
 
 dd{
     margin-bottom: 1rem;
+}
+
+.mild-blur{
+    filter:opacity(.5);
 }
 
 /* END Page Decoration */

@@ -44,72 +44,74 @@
                 </div>
             </div>
         </header>
-        <h1 id="title">JavaScripts Basics</h1>
-        <div page="1" section="lesson">
-            <div id="lesson" tabname="lesson" movetotab="lesson" aria-disabled="false">
-                <h2 class="icon-with-text">
-                    <span class="material-symbols-outlined icon">&#xef42;</span>
-                    <span>Lecture</span>
-                </h2>
-                <div id="lecture" class="section-content" ></div>
-                <div class="actions">
-                    <button class="action" movetotab="exercise">Move to Exercise</button>
-                </div>
-            </div>
-            <div id="exercise" tabname="exercise" movetotab="exercise" aria-disabled="true">
-                <h2 class="icon-with-text">
-                    <span class="material-symbols-outlined icon">&#xef54;</span>
-                    <span>Exercise</span>
-                </h2>
-                <div class="section-content" >
-                    <h3 class="icon-with-text">
-                        <span class="material-symbols-outlined icon">&#xe873;</span>
-                        <span>Exercise Overview</span>
-                    </h3>
-                    <div id="exercise-overview"></div>
-                    <h3 class="icon-with-text">
-                        <span class="material-symbols-outlined icon">&#xf075;</span>
-                        <span>Instuctions</span>
-                    </h3>
-                    <div id="instructions">
-                        <ol id="instructions-list"></ol>
-                    </div>
+        <div id="page-content">
+            <h1 id="title">JavaScripts Basics</h1>
+            <div page="1" section="lesson">
+                <div id="lesson" tabname="lesson" movetotab="lesson" aria-disabled="false">
+                    <h2 class="icon-with-text">
+                        <span class="material-symbols-outlined icon">&#xef42;</span>
+                        <span>Lecture</span>
+                    </h2>
+                    <div id="lecture" class="section-content" ></div>
                     <div class="actions">
-                        <p id="exercise-message"></p>
-                        <button id="nextlesson" class="action" movetotab="exercise" disabled>Next Lesson</button>
+                        <button class="action" movetotab="exercise">Move to Exercise</button>
                     </div>
-                    <h3 class="icon-with-text">
-                        <span class="material-symbols-outlined icon">&#xf075;</span>
-                        <span>Workspace</span>
-                    </h3>
-                    <div class="work">
-                        <div id="coding">
-                            <h4>Code</h4>
-                            <div class="code-tools">
-                                <button id="code-run" class="tool icon-with-text">
-                                    <span class="material-symbols-outlined icon">&#xe037;</span>
-                                    <span>Run</span>
-                                </button>
-                                <button id="code-copy" class="tool icon-with-text">
-                                    <span class="material-symbols-outlined icon">&#xe14d;</span>
-                                    <span>Copy</span>
-                                </button>
-                            </div>
-                            <div> 
-                                <ol id="code" class="code"></ol>
-                            </div>
+                </div>
+                <div id="exercise" tabname="exercise" movetotab="exercise" aria-disabled="true">
+                    <h2 class="icon-with-text">
+                        <span class="material-symbols-outlined icon">&#xef54;</span>
+                        <span>Exercise</span>
+                    </h2>
+                    <div class="section-content" >
+                        <h3 class="icon-with-text">
+                            <span class="material-symbols-outlined icon">&#xe873;</span>
+                            <span>Exercise Overview</span>
+                        </h3>
+                        <div id="exercise-overview"></div>
+                        <h3 class="icon-with-text">
+                            <span class="material-symbols-outlined icon">&#xf075;</span>
+                            <span>Instuctions</span>
+                        </h3>
+                        <div id="instructions">
+                            <ol id="instructions-list"></ol>
                         </div>
-                        <div id="result">
-                            <h4>Results</h4>
-                            <iframe id="results-iframe" width="100%" height="calc(100%-2rem)">
-                                This is where results go.
-                            </iframe>
+                        <div class="actions">
+                            <p id="exercise-message"></p>
+                            <button id="nextlesson" class="action" movetotab="exercise" disabled>Next Lesson</button>
+                        </div>
+                        <h3 class="icon-with-text">
+                            <span class="material-symbols-outlined icon">&#xf075;</span>
+                            <span>Workspace</span>
+                        </h3>
+                        <div class="work">
+                            <div id="coding">
+                                <h4>Code</h4>
+                                <div class="code-tools">
+                                    <button id="code-run" class="tool icon-with-text">
+                                        <span class="material-symbols-outlined icon">&#xe037;</span>
+                                        <span>Run</span>
+                                    </button>
+                                    <button id="code-copy" class="tool icon-with-text">
+                                        <span class="material-symbols-outlined icon">&#xe14d;</span>
+                                        <span>Copy</span>
+                                    </button>
+                                </div>
+                                <div> 
+                                    <ol id="code" class="code"></ol>
+                                </div>
+                            </div>
+                            <div id="result">
+                                <h4>Results</h4>
+                                <iframe id="results-iframe" width="100%" height="calc(100%-2rem)">
+                                    This is where results go.
+                                </iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="after"></div>
         </div>
-        <div class="after"></div>
         <script>    
             const courseWorker = new CourseWorker();
             (function(){ 
