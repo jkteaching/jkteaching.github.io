@@ -16,6 +16,8 @@
 
     --clr-head-link-text: #ffdab9;
     --clr-head-link-hover-text: #e0ffff;
+    --clr-head-link-selected-text: #b1f8f8;
+    --clr-head-link-selected-text-hover: #e0ffff;
 
     --clr-h1-bkg: #ffdab9;
     --clr-h2-bkg: #cfcfce;

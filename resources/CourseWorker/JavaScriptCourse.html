@@ -23,16 +23,25 @@
             </div>
             <div class="nav-item">
                 <div class="icon-with-text">
-                    <a id="course-list" href="#">
+                    <a id="course-list" href="#" flyout="course-list-flyout">
                         <span class="material-symbols-outlined icon">&#xf844;</span>
                         <span>Course</span>
                     </a>
+                </div>
             </div>
             <div class="nav-item">
                 <div class="icon-with-text">
                     <a id="settings" href="#">
                         <span class="material-symbols-outlined icon">&#xe8b8;</span>
                     </a>
+                </div>
+            </div>
+            <div id="course-list-flyout" class="flyout hide">
+                <div class="flyout-overlay"></div>
+                <div class="flyout-content">
+                    <h3>Course List</h3>
+                    <div id="course-list-data" class="flyout-data"></div>
+                </div>
             </div>
         </header>
         <h1 id="title">JavaScripts Basics</h1>
@@ -62,9 +71,11 @@
                         <span class="material-symbols-outlined icon">&#xf075;</span>
                         <span>Instuctions</span>
                     </h3>
-                    <div id="instructions"></div>
+                    <div id="instructions">
+                        <ol id="instructions-list"></ol>
+                    </div>
                     <div class="actions">
-                        <div id="exercise-message"></div>
+                        <p id="exercise-message"></p>
                         <button id="nextlesson" class="action" movetotab="exercise" disabled>Next Lesson</button>
                     </div>
                     <h3 class="icon-with-text">

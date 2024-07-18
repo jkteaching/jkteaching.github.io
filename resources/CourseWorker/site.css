@@ -54,6 +54,53 @@ header a:hover{
     flex:1;
 }
 
+.flyout{
+    position: fixed;
+    top:3rem;
+    right:0;
+    left:0;
+    bottom: 0;
+}
+
+.flyout-content{
+    display: inline-block;
+    position: absolute;
+    top:0;
+    right:0;
+    left: 0;
+    bottom:0;
+    background: var(--clr-head-bkg);
+    padding: 0 2rem;
+}
+
+.flyout a{
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: .7rem 0;
+}
+
+.flyout a.selected{
+    color: var(--clr-head-link-selected-text);
+}
+
+.flyout a.selected:hover{
+    color: var(--clr-head-link-selected-text-hover);
+}
+
+.flyout .flyout-overlay{
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right: 50%;
+    background: var(--clr-blur-bkg);
+}
+.flyout-data{
+    height: calc(100% - 4.5rem);
+    overflow-y: auto;
+}
+
 /* End Header */
 
 /* BEGIN Page Decoration */
@@ -81,6 +128,7 @@ h3 {
     background: var(--clr-h3-bkg);
     margin: 0 -2rem;
     padding: .83rem;
+    color: black;
 }
 
 h4{
@@ -98,7 +146,7 @@ h2 .icon {
 
 .actions{
     text-align: center;
-    padding:.5rem;
+    padding:1rem;
 }
 
 button.action{
@@ -184,6 +232,30 @@ div[section="lesson"] > div#exercise::before{
 
 #coding, #result{
     flex:1;
+}
+
+#instructions-list{
+    margin-bottom: 0;
+}
+
+#instructions-list li.complete{
+    list-style: none;
+    color: var(--clr-success);
+    text-decoration: line-through;
+}
+
+#instructions-list li.complete::marker{
+    content: '\e2e6';
+    font-family: 'Material Symbols Outlined';
+    word-spacing: .3rem;
+}
+
+#instructions-list li{
+    line-height: 1.5rem;
+}
+
+#instructions-list .actions{
+    padding-top: 0;
 }
 
 /* END Page Decoration */
@@ -287,6 +359,7 @@ code {
 
 .code li input.answer{
     display: inline;
+    min-width: 3rem;
     width:auto;
     border: 1px var(--clr-code-input-border) solid;
     color: var(--clr-code-input-text);
@@ -301,6 +374,15 @@ code {
 
 
 /* Media Query */
+@media(min-width:720px){
+    .flyout-content{
+        left: 50%;
+    }
+    .flyout .flyout-overlay{
+        display: inline-block;
+    }
+}
+
 @media (min-width:1024px){
 
     div[page]{

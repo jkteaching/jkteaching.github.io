@@ -3,6 +3,7 @@ class CourseWorker {
         this.course;
         this.lessonNumber = 1;
         this.lesson;
+        this.exercise;
         this.pageEvents = [];
     
         if(course) this.loadCourse(course);
@@ -23,8 +24,12 @@ class CourseWorker {
     }
 
     getNextLesson(){
-        if(this.lessonNumber < this.course.lessons.length)
-            this.setupLesson(this.lessonNumber + 1);
+        if(this.lessonNumber < this.course.lessons.length){
+            const params = new URLSearchParams(window.location.search);
+            params.set('page', ++this.lessonNumber);
+            window.location.search = params;
+            //this.setupLesson(this.lessonNumber); See if there is a way to fix this later;
+        }
     }
 
     switchToTab(tabName){
@@ -41,7 +46,7 @@ class CourseWorker {
 
     #setLesson(lessonNumber){
         const params = new URLSearchParams(window.location.search);
-        lessonNumber = parseInt(lessonNumber ?? params["page"] ?? 1);
+        lessonNumber = parseInt(lessonNumber ?? params.get("page") ?? 1);
 
         this.lessonNumber = lessonNumber <= this.course.lessons.length ? lessonNumber: this.lessonNumber;
         this.lesson = this.course.lessons[this.lessonNumber - 1];
@@ -53,15 +58,18 @@ class CourseWorker {
     }
 
     #setExercise(){
-        this.#addLinesToElement("exercise-overview",this.lesson.exercise.overview);
-        this.#setInstructions(this.lesson.exercise.instructions);
+        this.exercise = this.lesson.exercises[0];
+        this.#addLinesToElement("exercise-overview",this.exercise.overview);
+        this.#setInstructions(this.exercise.instructions);
+        this.#setIframeData(this.exercise.iframeData);
         this.#addLinesToElement("code",this.#getCodeLines());
     }
 
     #getCodeLines(){
         let codeLines = [];
-        this.lesson.exercise.data.forEach(line => {
-            let codeLine = "<code><li>" + line.replaceAll("{input}", '<input class="answer" type="text"/>') + "</li></code>"
+        this.exercise.data.forEach((line, idx) => {
+            const size = this.#getCharacterSize(this.exercise.answers[idx]);
+            let codeLine = "<code><li>" + line.replaceAll("{input}", '<input size="' + size + '" class="answer" type="text"/>') + "</li></code>"
             codeLines.push(codeLine);
         });
         return codeLines;
@@ -69,8 +77,32 @@ class CourseWorker {
 
     #setupPageEvents(){
         this.#resetPageEvents();
+        this.#setupHeader();
         this.#setupTabEvents();
         this.#setupCodeEvents();
+    }
+
+    #setupHeader(){
+        document.querySelectorAll("[flyout], .flyout-overlay").forEach(flyoutlink => {
+            this.pageEvents.push(flyoutlink.addEventListener("click",(e) => {
+                e.stopPropagation();
+                this.#toggleFlyout(flyoutlink.getAttribute("flyout") ?? flyoutlink.parentNode.id);
+            }));
+        });
+        this.#setupCourseList();
+    }
+
+    #toggleFlyout(flyoutId){
+        document.getElementById(flyoutId).classList.toggle("hide");
+    }
+
+    #setupCourseList(){
+        let courseData = new Array(this.course.lessons.length);
+        this.course.lessons.forEach((courseLesson,idx) => {
+            const linkClass = this.lessonNumber == (idx + 1) ? "selected": "";
+            courseData[idx] = '<div><a href="?page='+ (idx + 1) +'" title="' + courseLesson.title + '" class="' + linkClass + '">' + courseLesson.title + "</a></div>";
+        });
+        this.#addLinesToElement("course-list-data",courseData);
     }
 
     #setupTabEvents(){
@@ -79,7 +111,6 @@ class CourseWorker {
             this.pageEvents.push(tab.addEventListener("click",(e) => {
                 e.stopPropagation();
                 this.switchToTab(tab.getAttribute("movetotab"));
-                console.log("hit");
             }));
         });
 
@@ -91,6 +122,9 @@ class CourseWorker {
             document.getElementById("code-copy").addEventListener("click", () => this.#copyCode()),
             document.getElementById("nextlesson").addEventListener("click", () => this.getNextLesson())
         );
+        // document.querySelectorAll(".code input").forEach(input =>{
+        //     this.pageEvents.push(input.addEventListener("keydown", (event) => this.#changeInputSize(event)));
+        // }); //TODO Determine if I want this
     }
 
     #runCode(){
@@ -99,6 +133,8 @@ class CourseWorker {
     }
 
     #checkAnswer(){
+        this.#clearInstructionStepsStatus();
+
         if(this.#hasCorrectAnswers()){
             this.#enableElementById("nextlesson");
             this.#showMessageForCode("You have completed this lesson you can move on to the next one.", true);
@@ -125,16 +161,29 @@ class CourseWorker {
     }
 
     #hasCorrectAnswers(){
-        const answers = this.lesson.exercise.answers;
+        const answers = this.exercise.answers;
         const inputs = document.querySelectorAll(".code input");
         for(let i=0; i < answers.length; i++){
             try {
-                if(answers[i].trim() != inputs[i].value.trim()) return false;
+                if(answers[i].trim() == inputs[i].value.trim())
+                    this.#setInstructionStepsComplete(i);
+                else
+                    return false;
             } catch {
                 return false;
             }
         }
         return true;
+    }
+
+    #clearInstructionStepsStatus(){
+        const steps = document.querySelectorAll('#instructions-list li.completed');
+        steps.forEach(step => step.classList.remove("complete"));
+    }
+
+    #setInstructionStepsComplete(answerIdx){
+        const steps = document.querySelectorAll('#instructions-list li[answer-idx="'+answerIdx+'"]');
+        steps.forEach(step => step.classList.add("complete"));
     }
 
     #copyCode(){
@@ -147,7 +196,7 @@ class CourseWorker {
     }
 
     #getCode(){
-        let code = this.lesson.exercise.data.join();
+        let code = this.exercise.data.join();
         document.querySelectorAll(".code input")
             .forEach(inputElment => code = code.replace("{input}", inputElment.value));
         return code;
@@ -155,7 +204,7 @@ class CourseWorker {
 
     #injectAndExecuteCode(){
         let code = this.#getCode();
-        switch(this.lesson.exercise.dataType){
+        switch(this.exercise.dataType){
             case "HTML":
                 this.#injectHTML(code);
             case "JS":
@@ -182,18 +231,45 @@ class CourseWorker {
     }
 
     #addLinesToElement(elementId,lineArray){
-        let html = ""; 
-        lineArray.forEach(line => {
-            html += line;
-        });
-        document.getElementById(elementId).innerHTML = html;//TODO: change to string output from array to make it faster;
+        document.getElementById(elementId).innerHTML = lineArray.join('')
     }
 
     #setInstructions(instructions){
         let instructionsHtmlArray = new Array(instructions.length);
         instructions.forEach((step, idx) => {
-            instructionsHtmlArray[idx] = '<li answerIdx="' + step.answerLinkIndex + '">' + step.text + "</li>";//TODO: add icon with hide
+            instructionsHtmlArray[idx] = '<li answer-idx="' + step.answerLinkIndex + '">' + step.text + "</li>";//TODO: add icon with hide
         })
-        this.#addLinesToElement("instructions", instructionsHtmlArray);
+        this.#addLinesToElement("instructions-list", instructionsHtmlArray);
+    }
+
+    #setIframeData(iframeData){
+        const iframeDoc = document.getElementById("results-iframe").contentDocument;
+        iframeDoc.write(iframeData.join(''));
+    }
+
+    #changeInputSize(event){
+        var input = event.target,
+        size = parseInt(input.getAttribute('size'), 10),
+        isValidKey = this.#doesKeyCountForSize(event.keyCode);
+
+    if ( event.which === 8 && size > 0 ) input.setAttribute('size', size - 1); // backspace
+    else if ( isValidKey )
+        input.setAttribute('size', size + 1); // all other keystrokes
+    }
+
+    #getCharacterSize(text) {
+        let count = 0;
+        for(let i = 0; i < text.length; i++){
+            if(this.#doesKeyCountForSize(text.charCodeAt(i)))
+                ++count;
+        }
+        return count;
+    }
+
+    #doesKeyCountForSize(keyCode) {
+        return (keyCode >= 65 && keyCode <= 90) || // A-Z
+        (keyCode >= 97 && keyCode <= 122) || //a-z
+        (keyCode >= 48 && keyCode <= 57) || // 0-9
+        keyCode === 32; //space
     }
 }
