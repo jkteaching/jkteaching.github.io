@@ -96,7 +96,7 @@ class ProblemGenerator {
   }
 
   #getQuestionResultHTML(question, questionNumber){
-    let result = '<div class="'+ (question.isCorrect() ? "correct": "incorrect") +'">';
+    let result = '<div class="'+ (question.isCorrect() ? "success": "fail") +'">';
     result += '<h3>Question '+questionNumber +'</h3>';
     result += '<dl>';
     result += '<dt>Your Answer</dt>';

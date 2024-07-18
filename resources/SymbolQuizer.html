@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>JS Symbol Quizzer</title>
-        <style>
+        <style >
             .correct{
                 color:green;
             }
@@ -31,10 +31,33 @@
                 font-weight: bold;
             }
         </style>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <link rel="stylesheet" href="/resources/Styles/site.css"/>
+        <link rel="stylesheet" href="/resources/Styles/themes.css"/>
     </head>
-    <body>
+    <body class="coffee">
+        <header>
+            <div class="nav-item">
+                <span class="logo">JPK</span>
+            </div>
+            <div class="nav-item flex-1">
+                <div class="icon-with-text">
+                    <a href="/resources/index.html">
+                        <span class="material-symbols-outlined icon">&#xe105;</span>
+                        <span>Resources</span>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <div class="icon-with-text">
+                    <a id="settings" href="#">
+                        <span class="material-symbols-outlined icon">&#xe8b8;</span>
+                    </a>
+                </div>
+            </div>
+        </header>
         <h1>JS Symbol Quizzer</h1>
-        <div id="content">
+        <div id="content" class="section-content">
             <div>
                 <h2>Symbols To Test</h2>
                 <label><input id="useArithmeticSymbols" type="checkbox" checked/>Arithmetic Symbols</label><br>

@@ -1,0 +1,459 @@
+body{
+    padding: 0;
+    margin:0;
+    font-size: 16px;
+    line-height: 1;
+    font-family:Arial, Helvetica, sans-serif;
+    background: var(--clr-body-bkg);
+}
+
+a{
+    text-decoration: none;
+    color:var(--clr-link-text);
+}
+
+a:hover{
+    color:var(--clr-link-text-hover);
+}
+
+
+/* Begin Header */
+header{
+    position:sticky;
+    display: flex;
+    height:3rem;
+    width:100%;
+    background: var(--clr-head-bkg);
+    color: var(--clr-head-text);
+    left:0;
+    top:0;
+    align-items: center;
+    padding:.4rem;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+header .logo{
+    padding-right:1rem;
+}
+
+header .nav-item {
+    font-size: 1.2rem;
+    padding:.3rem;
+}
+
+header .nav-item .icon {
+    font-size: 1.2rem;
+}
+
+header a, header span{
+    display:inherit;
+}
+
+.flex-1{
+    flex:1;
+}
+
+.flyout{
+    position: fixed;
+    top:3rem;
+    right:0;
+    left:0;
+    bottom: 0;
+}
+
+.flyout-content{
+    display: inline-block;
+    position: absolute;
+    top:0;
+    right:0;
+    left: 0;
+    bottom:0;
+    background: var(--clr-head-bkg);
+    padding: 0 2rem;
+}
+
+.flyout a{
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: .7rem 0;
+}
+
+.flyout a.selected{
+    color: var(--clr-head-link-selected-text);
+}
+
+.flyout a.selected:hover{
+    color: var(--clr-head-link-selected-text-hover);
+}
+
+.flyout .flyout-overlay{
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right: 50%;
+    background: var(--clr-blur-bkg);
+}
+.flyout-data{
+    height: calc(100% - 4.5rem);
+    overflow-y: auto;
+}
+
+/* End Header */
+
+/* BEGIN Page Decoration */
+h1{
+    font-size: 1.6rem;
+    background: var(--clr-h1-bkg);
+    margin: 0;
+    padding: .83rem 0;
+    text-align: center;
+}
+
+h2{
+    font-size: .9rem;
+    background: var(--clr-h2-bkg);
+    margin: 0;
+    padding: .45rem .67rem;
+}
+
+h2 .icon {
+    font-size: .9rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    background: var(--clr-h3-bkg);
+    margin: 0 -2rem;
+    padding: .83rem;
+    color: black;
+}
+
+h4{
+    padding: .25rem;
+    margin: 0;
+    text-align: center;
+    background: var(--clr-h4-bkg);
+    line-height: 1.1;
+    font-size: 1.1rem;
+}
+
+h2 .icon {
+    font-size: .9rem;
+}
+
+.actions{
+    text-align: center;
+    padding:1rem;
+}
+
+button.action{
+    padding: .7rem;
+    font-size: 1.1rem;
+    outline: none;
+    border: .1rem solid var(--clr-btn-brd);
+    background: var(--clr-btn-bkg);
+    color: var(--clr-btn-text);
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+button.action:hover{
+    border: .1rem solid var(--clr-btn-brd-hover);
+    background: var(--clr-btn-bkg-hover);
+    color: var(--clr-btn-text-hover);
+}
+
+button.action:disabled{
+    filter:opacity(.3);
+    cursor: default;
+}
+
+button.action[disabled]:hover{
+    filter:opacity(.3);
+    border: .1rem solid var(--clr-btn-brd);
+    background: var(--clr-btn-bkg);
+    color: var(--clr-btn-text);
+}
+
+.section-content{
+    padding: 0 2rem;
+}
+
+div[page]{
+    display: flex;
+    flex-direction: column;
+}
+
+div[page] > div{
+    flex: 1;
+    background: var(--clr-content-bkg);
+    position: relative;
+    min-width:0;
+}
+
+div[section="exercise"] > div#lesson,
+div[section="lesson"] > div#exercise{
+    filter:opacity(.5);
+}
+
+div[section="exercise"] > div#lesson::before,
+div[section="lesson"] > div#exercise::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right:0;
+    bottom:0;
+    top:0;
+    background-color: var(--clr-blur-bkg);
+}
+
+div[section="exercise"] > div#lesson::before{
+    box-shadow: inset 0px -8px 6px -6px  black;
+}
+
+div[section="lesson"] > div#exercise::before{
+    box-shadow: inset 0px 8px 6px -6px  black;
+    
+}
+
+.after{
+    box-shadow: inset 0px 8px 6px -6px gray;
+    height: 30px;
+}
+
+.work{
+    display:flex;
+    flex-direction: column;
+    gap:.5rem;
+}
+
+#coding, #result{
+    flex:1;
+}
+
+#instructions-list{
+    margin-bottom: 0;
+}
+
+#instructions-list li.complete{
+    list-style: none;
+    color: var(--clr-success);
+    text-decoration: line-through;
+}
+
+#instructions-list li.complete::marker{
+    content: '\e2e6';
+    font-family: 'Material Symbols Outlined';
+    word-spacing: .3rem;
+}
+
+#instructions-list li{
+    line-height: 1.5rem;
+}
+
+#instructions-list .actions{
+    padding-top: 0;
+}
+
+dd{
+    margin-bottom: 1rem;
+}
+
+/* END Page Decoration */
+
+.icon-with-text{
+    display:flex;
+    align-items: center;
+}
+
+.icon-with-text .icon{
+    padding-right:.2rem;
+    font-size: 1rem;
+}
+
+.hide{
+    display:none;
+}
+
+.success{
+    color: var(--clr-success);
+}
+
+.fail{
+    color: var(--clr-fail);
+}
+
+button:disabled{
+    display: none;
+}
+
+.symbol{
+    width:24px;
+    text-align: center;
+}
+
+.symbol.leftAlign{
+    text-align: left;
+}
+
+.symbol.rightAlign{
+    text-align: right;
+}
+.bold{
+    font-weight: bold;
+}
+
+/* Begin Code Editor */
+
+.code-tools{
+    display:flex;
+    background-color: var(--clr-code-numbers-backdrop);
+    border-bottom: 1px solid var(--clr-code-numbers);
+}
+
+.code-tools .tool{
+    height: 2rem;
+    border: 0;
+    outline: 0;
+    border-right: 1px var(--clr-code-input-border) solid;
+    color: var(--clr-code-numbers);
+    background: var(--clr-code-tool-bkg);
+    cursor: pointer;
+}
+
+.code-tools .tool:hover{
+    background: var(--clr-code-tool-bkg-hover);
+}
+
+.code-tools .tool .icon{
+    padding: 0;
+}
+
+[aria-disabled="true"] code{
+    word-break: break-all;
+}
+
+[aria-disabled="false"] code{
+    word-break: unset;
+}
+
+code {
+    background: var(--clr-code-backdrop);
+    line-height: 1.4rem;
+    padding: 0.1rem 0.5rem;
+    color: var(--clr-code-text);
+    font-size: .8rem;
+}
+
+.code code{
+    padding: unset;
+    font-size: .9rem;
+}
+
+.code {
+    background: var(--clr-code-numbers-backdrop);
+    color: var(--clr-code-numbers);
+    overflow-x: auto;
+    white-space: nowrap;
+    margin:0;
+}
+
+.code li{
+    background: var(--clr-code-backdrop);
+    line-height: 1.6rem;
+    height: 1.6rem;
+    padding-left: 0.7rem;
+    color: var(--clr-code-text);
+}
+
+.code li input{
+    font-size: .9rem;
+    line-height: .9;
+    display: inline-block;
+    background: none;
+    box-sizing: border-box;
+    color: inherit;
+    outline:none;
+    width:100%;
+    border:0;
+}
+
+.code li input.answer{
+    display: inline;
+    min-width: 3rem;
+    width:auto;
+    border: 1px var(--clr-code-input-border) solid;
+    color: var(--clr-code-input-text);
+    box-sizing: border-box;
+}
+
+#result iframe{
+    box-sizing: border-box;
+}
+
+/* End Code Editor */
+
+
+/* Media Query */
+@media(min-width:720px){
+    .flyout-content{
+        left: 50%;
+    }
+    .flyout .flyout-overlay{
+        display: inline-block;
+    }
+}
+
+@media (min-width:1024px){
+
+    div[page]{
+        flex-direction: row;
+    }
+
+    div[section="lesson"] > div#lesson
+    {
+        flex: 4;
+    }
+
+    div[section="exercise"] > div#exercise
+    {
+        flex: 4;
+    }
+
+    div[section="exercise"] > div#lesson,
+    div[section="lesson"] > div#exercise
+    {
+        flex: 1;
+    }
+
+    div[section="exercise"] > div#lesson::before{
+        box-shadow: inset -8px 0px 6px -6px  black;
+    }
+
+    div[section="lesson"] > div#exercise::before{
+        box-shadow: inset 8px 0px 6px -6px  black;
+        
+    }
+}
+
+@media (min-width:1200px){
+    #coding{
+        margin-left: -1.5rem;
+    }
+
+    #result{
+        margin-right: -1.5rem;
+    }
+
+    #coding > h4,
+    #result > h4{
+        margin: 0;
+    }
+
+    div[section="exercise"] .work{
+        flex-direction: row;
+    }
+}
