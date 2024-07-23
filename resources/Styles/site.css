@@ -79,7 +79,7 @@ header a:hover{
     left: 0;
     bottom:0;
     background: var(--clr-head-bkg);
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 .flyout a{
@@ -273,6 +273,20 @@ dd{
 
 .mild-blur{
     filter:opacity(.5);
+}
+
+.flyout-content h3{
+    margin: 0 -1rem;
+}
+
+.flyout-content .course-section{
+    color: black;
+    text-align: left;
+    margin: 1.2rem 0 .7rem;
+}
+
+.flyout-content .course-lesson {
+    padding-left: 1rem;
 }
 
 /* END Page Decoration */

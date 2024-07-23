@@ -2,6 +2,7 @@ class CourseWorker {
     constructor(course){
         this.course;
         this.lessonNumber = 1;
+        this.lessons;
         this.lesson;
         this.exercise;
         this.pageEvents = [];
@@ -13,7 +14,15 @@ class CourseWorker {
         this.course = course;
 
         this.#setTitleInfo();
+        this.#setLessonsFromSections(course.sections);
         this.setupLesson();
+    }
+
+    #setLessonsFromSections(sections){
+        this.lessons = [];
+        sections.forEach(section => {
+            this.lessons.push(...section.lessons);
+        });
     }
 
     setupLesson(lessonNumber){
@@ -24,7 +33,7 @@ class CourseWorker {
     }
 
     getNextLesson(){
-        if(this.lessonNumber < this.course.lessons.length){
+        if(this.lessonNumber < this.lessons.length){
             const params = new URLSearchParams(window.location.search);
             params.set('page', ++this.lessonNumber);
             window.location.search = params;
@@ -48,8 +57,8 @@ class CourseWorker {
         const params = new URLSearchParams(window.location.search);
         lessonNumber = parseInt(lessonNumber ?? params.get("page") ?? 1);
 
-        this.lessonNumber = lessonNumber <= this.course.lessons.length ? lessonNumber: this.lessonNumber;
-        this.lesson = this.course.lessons[this.lessonNumber - 1];
+        this.lessonNumber = lessonNumber <= this.lessons.length ? lessonNumber: this.lessonNumber;
+        this.lesson = this.lessons[this.lessonNumber - 1];
         document.querySelector("[page]").setAttribute("page", this.lessonNumber);
     }
 
@@ -98,11 +107,18 @@ class CourseWorker {
     }
 
     #setupCourseList(){
-        let courseData = new Array(this.course.lessons.length);
-        this.course.lessons.forEach((courseLesson,idx) => {
-            const linkClass = this.lessonNumber == (idx + 1) ? "selected": "";
-            courseData[idx] = '<div><a href="?page='+ (idx + 1) +'" title="' + courseLesson.title + '" class="' + linkClass + '">' + courseLesson.title + "</a></div>";
-        });
+        let courseData = new Array(this.course.sections.length + this.lessons.length);
+        let slotCounter = 0;
+        let lessonCounter = 1;
+        this.course.sections.forEach(section =>{
+            courseData[slotCounter++] = '<h4 class="course-section">' + section.sectionName + '</h4>'
+            this.lessons.forEach(courseLesson => {
+                const linkClass = this.lessonNumber == lessonCounter ? "selected": "";
+                courseData[slotCounter++] = '<div class="course-lesson"><a href="?page='+ lessonCounter +'" title="' + courseLesson.title + '" class="' + linkClass + '">' + courseLesson.title + "</a></div>";
+                lessonCounter++;
+            });
+        })
+        
         this.#addLinesToElement("course-list-data",courseData);
     }
 
