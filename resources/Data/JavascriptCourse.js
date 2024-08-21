@@ -39,6 +39,28 @@ const courseData = {
                             iframeData: [],
                             answers: ['window.alert("Hello World");'],
                             answerInjectScript: `let alertWrapper = window.alert; window.alert = (message) => { console.log("It was a hit: " + message); alertWrapper(message); }`
+                        },
+                        {
+                            type: "lab",
+                            overview: [
+                                "<p>In this Exercise, we are going to attempt our first JavaScript code. We are first going to explain the JavaScript function that we will be running <code>window.alert()</code>.</p>",
+                                "<p>The function <code>window.alert()</code> is used when you want to display a popup on the client screen with a message. This popup will lock the users screen till they interact with the <strong>OK</strong> button. This function can be very useful in situation where we really need the user to pay attetion the message we are send. It is typically used when you want to inform the users if they continue with their action then something bad might happen, like loss of data.</p>"],
+                            instructions: [
+                                { 
+                                    text: "On line 1, type <code>window.alert(\"Hello World\");</code>",
+                                    answerLinkIndex: 0
+                                },
+                                { 
+                                    text: "Click the <strong>Run</strong> button.",
+                                    answerLinkIndex: 0
+                                }
+                            ],
+                            wrapCodeInScriptTag: true,
+                            dataType: "JS",
+                            data: ["{input}"],
+                            iframeData: [],
+                            answers: ['window.alert("Hello World");'],
+                            answerInjectScript: `let alertWrapper = window.alert; window.alert = (message) => { console.log("It was a hit: " + message); alertWrapper(message); }`
                         }
                     ]
                 },
