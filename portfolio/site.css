@@ -80,16 +80,34 @@ header .socials ul li{
 .module-items {
     display: flex;
     flex-direction: row;
-    gap:10px;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.help-items .module-item{
+.module-item{
     flex: 1;
+    padding: 0 5px;
+}
+
+.portfolio-items .module-item{
+    flex-basis: 24%;
+}
+
+.help-items .module-item{
     flex-basis: 49%;
 }
 
+.achievement-items .module-item{
+    flex-basis: 32%;
+}
+
+.accent,
+.module-items h3 {
+    color: #F90606;
+}
+
+
+/* skills bar chart */
 .skills-bar-chart{
     --line-count: 5;
     --line-color: currentcolor;
