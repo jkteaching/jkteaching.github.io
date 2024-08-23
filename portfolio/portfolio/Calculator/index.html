@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Calculator</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="Calculator">
+        <meta name="description" content="A Calculator that allows you to add, subtract, multiply, and divide two numbers">
+        <style>
+            body{
+                background-color: peachpuff;
+            }
+            .operand-group{
+                user-select: none;
+            }
+
+            .content{
+                background: lightblue;
+                display: inline-block;
+                min-width:200px;
+                padding: 20px;
+                position: absolute;
+                left:50%;
+                top:50%;
+                transform: translate(-50%,-50%);
+            }
+
+            .row, .column{
+                display: flex;
+                height:30px;
+            }
+
+            .column{
+                flex-direction: column;
+            }
+
+            button, input, .full{
+                flex:1;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <div class="row">
+                <input id="number" type="text" />
+            </div>
+            <br>
+            <div class="number-group">
+                <div class="row">
+                    <button onclick="addToNumberBox(7)">7</button>
+                    <button onclick="addToNumberBox(8)">8</button>
+                    <button onclick="addToNumberBox(9)">9</button>
+                    <button onclick="addValueWithOperand('+')">+</button>
+                </div>
+                <div class="row">
+                    <button onclick="addToNumberBox(4)">4</button>
+                    <button onclick="addToNumberBox(5)">5</button>
+                    <button onclick="addToNumberBox(6)">6</button>
+                    <button onclick="addValueWithOperand('-')">-</button>
+                </div>
+                <div class="row">
+                    <button onclick="addToNumberBox(1)">1</button>
+                    <button onclick="addToNumberBox(2)">2</button>
+                    <button onclick="addToNumberBox(3)">3</button>
+                    <button onclick="addValueWithOperand('*')">X</button>
+                </div>
+                <div class="row">
+                    <button onclick="toggleNegative()">+/-</button>
+                    <button onclick="addToNumberBox(0)">0</button>
+                    <button onclick="addToNumberBox('.')">.</button>
+                    <button onclick="addValueWithOperand('/')">&#247;</button>
+                </div>
+            </div>
+            <div class="row">
+                <button class="full" onclick="calculate();">=</button>
+            </div>
+            <br>
+            <div class="column">
+                <div id="formula"></div>
+                <input id="result" type="number" />
+            </div>
+        </div>
+        <script type="text/javascript">
+            let valueWithOperation = []; //{value: number, operand: operand}
+
+            function calculate(){
+                addValueWithOperand(""); //what is left in number box
+
+                let result = 0;
+
+                for(let i = 0; i < valueWithOperation.length; i++){
+    
+                    const value = valueWithOperation[i].value;
+                    const operand = i != 0 ? valueWithOperation[i-1].operand: "";
+
+                    if(operand == "+") result += value;
+                    else if(operand == "-") result -= value;
+                    else if(operand == "/") result /= value;
+                    else if(operand == "*") result *= value;
+                    else if(operand == "") result = value;
+                }
+
+                document.getElementById("result").value = result;
+                valueWithOperation = [];
+            }
+
+            function addValueWithOperand(operand){
+                const numberElement = document.getElementById("number");
+                if(numberElement.value != ""){
+                    const number = parseFloat(numberElement.value);
+                    valueWithOperation.push({ value:number, operand: operand });
+                    numberElement.value = "";
+
+                    let formula = document.getElementById("formula");
+
+                    if(valueWithOperation.length > 1)
+                        formula.innerHTML =  "(" + formula.innerHTML + number + ")"  + operand;
+                    else
+                        formula.innerHTML = number + operand;
+                }
+            }
+
+            function addToNumberBox(number){
+                document.getElementById("number").value += number;
+            }
+
+            function toggleNegative(){
+                const numberElement = document.getElementById("number");
+                const isNegative = numberElement.value.indexOf("-") >= 0;
+
+                if(isNegative)
+                    numberElement.value = numberElement.value.replace("-", "");
+                else
+                    numberElement.value = "-" + numberElement.value;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <style>
+            #content{
+                width:150px;
+            }
+            .row{display: flex;}
+            button{
+                flex:1;
+                min-height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <div id="message"></div>
+            <div class="row">
+                <button class="slot" onclick="placePiece(this,0,0)"></button>
+                <button class="slot" onclick="placePiece(this,1,0)"></button>
+                <button class="slot" onclick="placePiece(this,2,0)"></button>
+            </div>
+            <div class="row">
+                <button class="slot" onclick="placePiece(this,0,1)"></button>
+                <button class="slot" onclick="placePiece(this,1,1)"></button>
+                <button class="slot" onclick="placePiece(this,2,1)"></button>
+            </div>
+            <div class="row">
+                <button class="slot" onclick="placePiece(this,0,2)"></button>
+                <button class="slot" onclick="placePiece(this,1,2)"></button>
+                <button class="slot" onclick="placePiece(this,2,2)"></button>
+            </div>
+            <div class="row">
+                <button onclick="clearBoard()">Clear Board</button>
+            </div>
+        </div>
+        <script>
+            let messageTimeout;
+            let gameBoard;
+            let isXTurn = true;
+            let gameOver = false;
+
+            function sendMessage(message){
+                let messageElement = document.getElementById("message");
+                messageElement.innerHTML = message;
+
+                if(messageTimeout) clearTimeout(messageTimeout);
+
+                messageTimeout = setTimeout(function(){
+                    messageElement.innerHTML = "";  
+                },5000);
+            }
+
+            function placePiece(slot, x, y){
+                if(gameOver) return;
+
+                gameBoard[x][y] = isXTurn ? 1 : -1;
+                slot.innerHTML = isXTurn ? "X" : "O";
+
+                if(checkForWinner()) return;
+
+                isXTurn = !isXTurn;
+                sendMessage("It is now " + (isXTurn ? "X" : "O") + "'s turn" );
+            }
+
+            function isSumWinner(sum){
+                if (sum == 3){
+                    sendMessage("X has won!!!");
+                    return gameOver = true;
+                }
+                else if (sum == -3){
+                    sendMessage("O has won!!!");
+                    return gameOver = true;
+                }
+                return false;
+            }
+
+            function checkForWinner(){
+                //Check rows
+                for(let xIdx = 0; xIdx < 3; xIdx++){
+                    let sum = 0;
+                    for(let yIdx = 0; yIdx < 3; yIdx++){
+                        sum += gameBoard[xIdx][yIdx];
+                    }
+                    if (isSumWinner(sum)) return true;
+                }
+
+                //Check Columns
+                for(let yIdx = 0; yIdx < 3; yIdx++){
+                    let sum = 0;
+                    for(let xIdx = 0; xIdx < 3; xIdx++){
+                        sum += gameBoard[xIdx][yIdx];
+                    }
+                    if (isSumWinner(sum)) return true;
+                }
+                
+                //Check diag left
+                {
+                    let sum = gameBoard[0][0] + gameBoard[1][1] + gameBoard[2][2];
+                    if(isSumWinner(sum)) return true;
+                }
+                
+                //Check diag right
+                {
+                    let sum = gameBoard[0][2] + gameBoard[1][1] + gameBoard[2][0];
+                    if(isSumWinner(sum)) return true;
+                }
+            }
+            
+            function clearBoard(){
+                gameBoard = [ new Array(3), new Array(3), new Array(3)];
+                isXTurn = true;
+                gameOver = false;
+
+                let slots = document.getElementsByClassName("slot");
+                for(let idx = 0; idx < slots.length; idx++)
+                    slots[idx].innerHTML = "";
+            }
+
+            clearBoard();
+        </script>
+    </body>
+</html>
