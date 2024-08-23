@@ -1,6 +1,7 @@
 body{
     padding:0;
     margin: 0;
+    font-family:Arial, Helvetica, sans-serif
 }
 
 header{
@@ -89,6 +90,34 @@ header .socials ul li{
     padding: 0 5px;
 }
 
+.module-item-contents {
+    text-align: center;
+}
+
+.module-item-contents .module-item-description{
+    text-align: left;
+}
+.module-item-contents .module-item-description-link{
+    text-align: center;
+}
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 5rem;
+}
+#about .sub-heading{
+    font-size: 2rem;
+}
+
+#about .description{
+    font-size: 1.2rem;
+}
+
+#about img{
+    width: 75%;
+    height: auto;
+}
+
 .portfolio-items .module-item{
     flex-basis: 24%;
 }
@@ -104,6 +133,16 @@ header .socials ul li{
 .accent,
 .module-items h3 {
     color: #F90606;
+}
+
+
+button{
+    border: 2px solid #19A651;
+    color: #19A651;
+    padding: .6rem 1.2rem;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: pointer;
 }
 
 
